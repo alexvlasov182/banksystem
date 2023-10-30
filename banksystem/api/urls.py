@@ -1,6 +1,12 @@
 from django.urls import path
 
-from .views import BranchesAPIView, BanksAPIView, BranchDetailAPIView, BankDetailAPIView
+from .views import (
+    BranchesAPIView,
+    BanksAPIView,
+    BranchDetailAPIView,
+    BankDetailAPIView,
+    CreateAccountAPIView,
+)
 
 app_name = "banksystem"
 
@@ -13,4 +19,6 @@ urlpatterns = [
     path("banks/", BanksAPIView.as_view(), name="bank-list"),
     # Retrive, update, or delete a specific bank
     path("bank/<int:pk>/", BankDetailAPIView.as_view(), name="bank-detail"),
+    # Create account
+    path("create_account/", CreateAccountAPIView.as_view(), name="create-account"),
 ]
