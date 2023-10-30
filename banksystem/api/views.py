@@ -5,8 +5,8 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Branch, Bank
-from .serializers import BranchSerializer, BankSerializer
+from .models import Branch, Bank, Client, Account
+from .serializers import BranchSerializer, BankSerializer, AccountSerializer
 
 
 class BranchesAPIView(generics.ListCreateAPIView):
@@ -59,3 +59,20 @@ class BankDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Bank.objects.all()
     serializer_class = BankSerializer
+
+
+class CreateAccountAPIView(APIView):
+    def post(self, request):
+        client = Client.objects.create(
+            name=request.data["full_name"], address=request.data["address"]
+        )
+        bank = Bank.objects.get(pk=request.data["bank"])
+        account = Account.objects.create(
+            client=client,
+            open_date=request.data["open_date"],
+            account_type=request.data["account_type"],
+            bank=bank,
+        )
+        serializer = AccountSerializer(account)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
