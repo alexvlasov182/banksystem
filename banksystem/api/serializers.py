@@ -48,6 +48,8 @@ class BankSerializer(serializers.ModelSerializer):
         branch (Branch): The associated branch.
     """
 
+    branch = BranchSerializer()
+
     class Meta:
         model = Bank
         fields = "__all__"
@@ -99,6 +101,9 @@ class AccountSerializer(serializers.ModelSerializer):
         account_type (str): The type of the account.
         bank (Bank): The associated bank.
     """
+
+    client = ClientSerializer()
+    bank = BankSerializer()
 
     class Meta:
         model = Account
