@@ -7,6 +7,9 @@ from .views import (
     BankDetailAPIView,
     CreateAccountAPIView,
     AccountListAPIView,
+    DepositAPIView,
+    WithdrawAPIView,
+    AccountDetailAPIView,
 )
 
 app_name = "banksystem"
@@ -24,4 +27,10 @@ urlpatterns = [
     path("create_account/", CreateAccountAPIView.as_view(), name="create-account"),
     # Retrive account
     path("accounts/", AccountListAPIView.as_view(), name="accounts"),
+    # Create deposit
+    path("deposits/", DepositAPIView.as_view(), name="deposits"),
+    # Create withdraw
+    path("withdrawals/", WithdrawAPIView.as_view(), name="withdrawals"),
+    # Get id account
+    path("account/<int:pk>/", AccountDetailAPIView.as_view(), name="account-detail"),
 ]

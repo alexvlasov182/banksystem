@@ -110,6 +110,21 @@ class Account(models.Model):
     account_type = models.CharField(max_length=250)
     bank = models.ForeignKey(Bank, on_delete=models.CASCADE)
 
+    @property
+    def balance(self):
+        deposits = sum(
+            [deposit.amount for deposit in Deposit.objects.filter(account=self.id)]
+        )
+        withdrawals = sum(
+            [
+                withdrawal.amount
+                for withdrawal in Withdraw.objects.filter(account=self.id)
+            ]
+        )
+
+        total = deposits - withdrawals
+        return total
+
     def __str__(self):
         return self.account_type
 

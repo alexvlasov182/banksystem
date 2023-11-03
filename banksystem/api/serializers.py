@@ -112,6 +112,16 @@ class AccountSerializer(serializers.ModelSerializer):
         read_only_fields = ("id",)
 
 
+class AccountDetailSerializer(serializers.ModelSerializer):
+    client = ClientSerializer()
+    bank = BankSerializer()
+    balance = serializers.DecimalField(max_digits=12, decimal_places=2)
+
+    class Meta:
+        model = Account
+        fields = ["client", "bank", "balance", "open_date", "account_type"]
+
+
 class TransferSerializer(serializers.ModelSerializer):
 
     """

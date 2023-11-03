@@ -5,8 +5,15 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import Branch, Bank, Client, Account
-from .serializers import BranchSerializer, BankSerializer, AccountSerializer
+from .models import Branch, Bank, Client, Account, Deposit, Withdraw
+from .serializers import (
+    BranchSerializer,
+    BankSerializer,
+    AccountSerializer,
+    DepositSerializer,
+    WithdrawSerializer,
+    AccountDetailSerializer,
+)
 
 
 class BranchesAPIView(generics.ListCreateAPIView):
@@ -81,3 +88,18 @@ class CreateAccountAPIView(APIView):
 class AccountListAPIView(generics.ListAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
+
+
+class AccountDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountDetailSerializer
+
+
+class DepositAPIView(generics.ListCreateAPIView):
+    queryset = Deposit.objects.all()
+    serializer_class = DepositSerializer
+
+
+class WithdrawAPIView(generics.ListCreateAPIView):
+    queryset = Withdraw.objects.all()
+    serializer_class = WithdrawSerializer
