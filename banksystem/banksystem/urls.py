@@ -19,9 +19,12 @@ from django.urls import path
 from django.conf.urls import include, url
 
 from . import views
+from .views import CustomerDetailView, CustomerListView
 
 urlpatterns = [
     path("base/", views.base, name="base"),
+    path("list/", CustomerListView.as_view(), name="customer-list"),
+    path("<int:customer_id>/", CustomerDetailView.as_view(), name="customer-detail"),
     path("branches/", views.branch_list, name="branch_list"),
     path("branch-add/", views.branch_add, name="branch_add"),
     path("admin/", admin.site.urls),
