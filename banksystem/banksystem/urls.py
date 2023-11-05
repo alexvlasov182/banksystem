@@ -17,11 +17,15 @@ from django import views
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
+
 from . import views
 
 urlpatterns = [
     path("base/", views.base, name="base"),
+    path("branches/", views.branch_list, name="branch_list"),
+    path("branch-add/", views.branch_add, name="branch_add"),
     path("admin/", admin.site.urls),
     url(r"^api-auth/", include("rest_framework.urls")),
     url(r"^api/", include("api.urls")),
+    # path("branches/", BranchesAPIView.as_view(), name="branch-list"),
 ]
