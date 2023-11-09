@@ -17,8 +17,8 @@ class Customer(models.Model):
         created_at (datetime): The timestamp when the customer record was created.
     """
 
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50, db_index=True)
+    last_name = models.CharField(max_length=50, db_index=True)
     email = models.EmailField(unique=True)
     age = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -36,6 +36,9 @@ class Customer(models.Model):
         return f"{self.first_name} {self.last_name}"
 
     def __str__(self):
+        """
+        Return the string representation of the customer.
+        """
         return self.full_name()
 
     def clean(self):
@@ -46,6 +49,9 @@ class Customer(models.Model):
             raise ValidationError("Age must be 18 or older")
 
     def save(self, *args, **kwargs):
+        """
+        Save the customer recored, performing validation before saving.
+        """
         try:
             self.full_clean()
             super(Customer, self).save(*args, **kwargs)
@@ -61,20 +67,54 @@ class Branch(models.Model):
     Represent a bank branch
 
     Attributes:
-        name (str): The name of the branch.
+        branch_name (str): The name of the branch.
         address (str): The address of the branch.
         branch_code (str): The branch code.
 
     Meta:
         verbose_name_plural = "Branches"
+
+    Methods:
+        __str__(): Returns the branch name a string.
     """
 
-    name = models.CharField(max_length=250)
-    address = models.CharField(max_length=250)
-    branch_code = models.CharField(max_length=250)
+    branch_name = models.CharField(
+        max_length=250, verbose_name="Branch Name", db_index=True
+    )
+    address = models.CharField(max_length=250, verbose_name="Address")
+    branch_code = models.CharField(
+        max_length=250, verbose_name="Branch Code", unique=True
+    )
 
     class Meta:
         verbose_name_plural = "Branches"
 
     def __str__(self):
+        """
+        Returns the branch name as a string.
+        """
+        return self.name
+
+
+class Bank(models.Model):
+    """
+    Represent a bank.
+
+    Attributes:
+        bank_name (str): The name of the bank. Must be unique
+        bank_branch (Branch): The branch to which the bank belongs. Can be empty
+    """
+
+    bank_name = models.CharField(
+        max_length=250, verbose_name="Bank Name", db_index=True, unique=True
+    )
+    bank_branch = models.ForeignKey(
+        Branch,
+        on_delete=models.CASCADE,
+        related_name="banks",
+        verbose_name="Bank Branch",
+    )
+
+    def __str__(self):
+        "Returns the bank name as a string"
         return self.name

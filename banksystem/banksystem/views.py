@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import Customer, Branch
+from .models import Customer, Branch, Bank
 from .forms import BranchForm, CustomerForm
 
 
@@ -84,6 +84,28 @@ class CustomerAdd(View):
             form.save()
             return redirect("customer_list")
         return render(request, self.template_name, {"form": form})
+
+
+class BankListView(View):
+    """
+    View to list all Banks.
+    """
+
+    template_name = "bank/bank_list.html"
+
+    def get(self, request):
+        """
+        Handle GET request to list all banks.
+
+        Args:
+            request: The HTTP request object.
+
+        Returns:
+            A response with a list of banks.
+        """
+        customers = Bank.objects.all()
+        context = {"banks": banks}
+        return render(request, self.template_name, context)
 
 
 def base(request):
