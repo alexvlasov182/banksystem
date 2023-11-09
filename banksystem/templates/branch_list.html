@@ -9,8 +9,7 @@
     <ul>
       {% for branch in branches %}
       <li>
-        {{ branch.name }} - {{ branch.address }} (Branch Code: {{
-        branch.branch_code }})
+        {{branch.branch_name}} | {{ branch.address }} | {{branch.branch_code}}
       </li>
       {% endfor %}
     </ul>

@@ -1,4 +1,3 @@
-<!-- branch_list.html -->
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,8 +8,8 @@
     <ul>
       {% for customer in customers %}
       <li>
-        {{ customer.first_name }} - {{ customer.last_name }} (Branch Code: {{
-        customer.email }}) Age: {{ customer.age }}
+        {{ customer.first_name }} - {{ customer.last_name }}, Age:
+        {{customer.age}}
       </li>
       {% endfor %}
     </ul>

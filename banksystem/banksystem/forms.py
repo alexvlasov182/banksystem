@@ -1,5 +1,5 @@
 from django import forms
-from .models import Branch, Customer
+from .models import Branch, Customer, Bank
 
 
 class BranchForm(forms.ModelForm):
@@ -9,9 +9,13 @@ class BranchForm(forms.ModelForm):
 
     class Meta:
         model = Branch
-        fields = "__all__"
+        fields = [
+            "branch_name",
+            "address",
+            "branch_code",
+        ]
         labels = {
-            "name": "Branch Name",
+            "branch_name": "Branch Name",
             "address": "Branch Address",
             "branch_code": "Branch Code",
         }
@@ -24,10 +28,26 @@ class CustomerForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        fields = "__all__"
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "age",
+        ]
         labels = {
             "first_name": "First Name",
             "last_name": "Last Name",
             "email": "Email Address",
             "age": "Age",
         }
+
+
+class BankForm(forms.ModelForm):
+    """
+    Form for adding or updating a bank
+    """
+
+    class Meta:
+        model = Bank
+        fields = "__all__"
+        labels = {"bank_name": "Bank Name", "bank_branch": "Bank Branch"}

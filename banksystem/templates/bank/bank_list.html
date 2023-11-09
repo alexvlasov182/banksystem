@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>List of Bsnks</title>
+  </head>
+  <body>
+    <h1>List of Bank</h1>
+    <ul>
+      {% for bank in banks %}
+      <li>{{ bank.bank_name }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -3,10 +3,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from . import views
-from .views import CustomerDetailView, CustomerListView, CustomerAdd
+from .views import (
+    CustomerDetailView,
+    CustomerListView,
+    CustomerAdd,
+    BankListView,
+    BankAdd,
+)
 
 urlpatterns = [
     path("base/", views.base, name="base"),
+    path("banks/", BankListView.as_view(), name="bank_list"),
+    path("bank-add/", BankAdd.as_view(), name="bank_add"),
     path("customers/", CustomerListView.as_view(), name="customer_list"),
     path("<int:customer_id>/", CustomerDetailView.as_view(), name="customer-detail"),
     path("customer-add/", CustomerAdd.as_view(), name="customer_add"),

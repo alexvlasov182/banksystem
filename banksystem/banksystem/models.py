@@ -93,7 +93,7 @@ class Branch(models.Model):
         """
         Returns the branch name as a string.
         """
-        return self.name
+        return self.branch_name
 
 
 class Bank(models.Model):
@@ -117,4 +117,4 @@ class Bank(models.Model):
 
     def __str__(self):
         "Returns the bank name as a string"
-        return self.name
+        return self.bank_name
