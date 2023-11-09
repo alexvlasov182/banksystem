@@ -1,4 +1,3 @@
-from datetime import timezone
 from django.db import models
 from django.core.exceptions import ValidationError
 import logging
@@ -40,6 +39,9 @@ class Customer(models.Model):
         return self.full_name()
 
     def clean(self):
+        """
+        Validate the customer's age ot ensure they are 18 or older
+        """
         if self.age < 18:
             raise ValidationError("Age must be 18 or older")
 

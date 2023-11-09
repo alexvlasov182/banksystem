@@ -70,6 +70,15 @@ class CustomerAdd(View):
         return render(request, self.template_name, {"form": form})
 
     def post(self, request):
+        """
+        Handle POST request to add a customer to the database.
+
+        Args:
+            request: The HTTP tequest object.
+
+        Returns:
+            A response with the customer addition form or a redirect to the customer list.
+        """
         form = CustomerForm(request.POST)
         if form.is_valid():
             form.save()
@@ -78,15 +87,42 @@ class CustomerAdd(View):
 
 
 def base(request):
+    """
+    Handle the base request.
+
+    Args:
+        request: THe HTTP request object.
+
+    Returns:
+        A response for the base request.
+    """
     return render(request, "base.html")
 
 
 def branch_list(request):
+    """
+    Handle the request to list all branches.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        A response with a list of branches.
+    """
     branches = Branch.objects.all()
     return render(request, "branch_list.html", {"branches": branches})
 
 
 def branch_add(request):
+    """
+    Handle the request to add a branch.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        A response with the branch addition form or a redirect to the branch list.
+    """
     if request.method == "POST":
         form = BranchForm(request.POST)
         if form.is_valid():
