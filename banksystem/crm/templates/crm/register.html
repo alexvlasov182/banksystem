@@ -1,9 +1,30 @@
-<html>
-  <h1>Register Now!</h1>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registration</title>
+    <link
+      rel="stylesheet"
+      href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
+    />
+    <link rel="stylesheet" href="../../../static/style.css" />
+  </head>
+  <body>
+    <div class="box medium-4 columns medium-pull-4">
+      <form
+        data-abide
+        method="POST"
+        action="register"
+        autocomplete="off"
+        class="callout text-center"
+      >
+        <h2>Register</h2>
+        {% csrf_token %}
+        <div data-abide-error class="sr-only">{{registerform.as_p}}</div>
 
-  <form method="POST" autocomplete="off">
-    {% csrf_token %} {{registerform.as_p}}
-
-    <input type="submit" value="Register" />
-  </form>
+        <input class="button expanded" type="submit" />
+      </form>
+    </div>
+  </body>
 </html>
