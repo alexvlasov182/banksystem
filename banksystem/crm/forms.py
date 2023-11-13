@@ -6,19 +6,22 @@ from django import forms
 from django.forms.widgets import PasswordInput, TextInput
 
 
-# - Create/Register a user (Model Form)
-
-
 class CreateUserForm(UserCreationForm):
+
+    """
+    Custom form to create/register a user.
+    """
+
     class Meta:
         model = User
 
         fields = ["username", "email", "password1", "password2"]
 
 
-# - Authenticate a user (Model Form)
-
-
 class LoginForm(AuthenticationForm):
+    """
+    Custom form to authenticate a user.
+    """
+
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
