@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LoginForm
 
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 # - Authentication models and functions
 
@@ -11,7 +12,8 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def homepage(request):
-    return render(request, "crm/index.html")
+    current_date = timezone.now()
+    return render(request, "crm/index.html", {"current_date": current_date})
 
 
 def register(request):
