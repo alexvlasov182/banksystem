@@ -24,6 +24,7 @@ urlpatterns = [
     url(r"^api-auth/", include("rest_framework.urls")),
     url(r"^api/", include("api.urls")),
     # path("branches/", BranchesAPIView.as_view(), name="branch-list"),
+    path("", include("crm.urls")),
 ]
 
 """
