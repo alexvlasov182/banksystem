@@ -3,23 +3,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from . import views
-from .views import (
-    CustomerDetailView,
-    CustomerListView,
-    CustomerAdd,
-    BankListView,
-    BankAdd,
-)
+from django.urls import path
+from .views import SignUpView, CustomLoginView, CustomLogoutView, customer_dashboard
+
 
 urlpatterns = [
-    path("base/", views.base, name="base"),
-    path("banks/", BankListView.as_view(), name="bank_list"),
-    path("bank-add/", BankAdd.as_view(), name="bank_add"),
-    path("customers/", CustomerListView.as_view(), name="customer_list"),
-    path("<int:customer_id>/", CustomerDetailView.as_view(), name="customer-detail"),
-    path("customer-add/", CustomerAdd.as_view(), name="customer_add"),
-    path("branches/", views.branch_list, name="branch_list"),
-    path("branch-add/", views.branch_add, name="branch_add"),
+    path("", views.homepage, name=""),
+    path("signup", SignUpView.as_view(), name="signup"),
+    path("login", CustomLoginView.as_view(), name="login"),
+    path("logout/", CustomLogoutView.as_view(), name="logout"),
+    path("dashboard/", customer_dashboard, name="customer_dashboard"),
     path("admin/", admin.site.urls),
     url(r"^api-auth/", include("rest_framework.urls")),
     url(r"^api/", include("api.urls")),

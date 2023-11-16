@@ -54,7 +54,7 @@ label {
     display: none;
 }
 
-.sr-only > ul {
+form > ul {
     display: none;
 }
 

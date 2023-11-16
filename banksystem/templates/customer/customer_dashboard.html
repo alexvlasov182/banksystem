@@ -1,0 +1,12 @@
+<!-- customer_dashboard.html -->
+
+<h2>Welcome {{ customer.name }}</h2>
+<ul>
+  {% for account in accounts %}
+  <li>
+    <a href="{% url 'transaction' account_number=account.account_number %}"
+      >Account {{ account.account_number }} - Balance: ${{ account.balance }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>
