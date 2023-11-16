@@ -125,5 +125,57 @@ def list_bank_account(request):
     return render(request, "list_bank_accounts.html", {"accounts": accounts})
 
 
+@login_required(login_url="/login")
+def withdraw(request):
+    customer = request.user.customer
+    accounts = BankAccount.objects.filter(customer=customer)
+
+    # If the customer has only one account, directly show the balance
+    if accounts.count() == 1:
+        account = accounts.first()
+        if request.method == "POST":
+            # Handle the withdrawal logic here
+            withdrawal_amount = float(request.POST.get("withdrawal_amount", 0))
+            if withdrawal_amount > 0 and withdrawal_amount <= account.balance:
+                # Withdrawal is valid, update the balance and create a transaction
+                account.balance -= withdrawal_amount
+                account.save()
+                Transaction.objects.create(
+                    bank_account=account,
+                    transaction_type="Withdrawal",
+                    amount=withdrawal_amount,
+                )
+                return render(
+                    request, "withdraw_success.html", {"balance": account.balance}
+                )
+            else:
+                # Invalid withdrawal amount, show an error message
+                return render(
+                    request,
+                    "withdraw_error.html",
+                    {"error_message": "Invalid withdrawal amount"},
+                )
+        else:
+            return render(request, "withdraw.html", {"account": account})
+
+    # If the customer has multiple accounts, display a list of accounts
+    if request.method == "POST":
+        # Handle the form submission to choose an account
+        account_number = request.POST.get("account_number")
+        selected_account = accounts.filter(account_number=account_number).first()
+        if selected_account:
+            # Render the withdrawal form for the selected account
+            return render(request, "withdraw.html", {"account", selected_account})
+        else:
+            # Invalid account selection, show an error message
+            return render(
+                request,
+                "withdraw_error.html",
+                {"error_message": "Invalid account selection"},
+            )
+    else:
+        return render(request, "choose_account_withdraw.html", {"accounts": accounts})
+
+
 class CustomLogoutView(LogoutView):
     template_name = "logout.html"
