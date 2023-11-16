@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api",
     "rest_framework",
-    "banksystem",
     "crm",
+    "banksystem.apps.BanksystemConfig",
 ]
 
 MIDDLEWARE = [

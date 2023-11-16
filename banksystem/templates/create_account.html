@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registration</title>
+    <link
+      rel="stylesheet"
+      href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
+    />
+    <link rel="stylesheet" href="../../static/style.css" />
+  </head>
+
+  <div class="box medium-4 columns medium-pull-4">
+    <h2>Create New Bank Account</h2>
+    <form method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button class="button" type="submit">Create Account</button>
+    </form>
+    <p><a href="{% url 'customer_dashboard' %}">Back to Dashboard</a></p>
+  </div>
+</html>

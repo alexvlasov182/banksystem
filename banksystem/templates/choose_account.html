@@ -1,0 +1,10 @@
+<h2>Choose an Account</h2>
+<ul>
+  {% for account in accounts %}
+  <li>
+    <a href="{% url 'show_balance' account.account_number %}"
+      >Account {{ account.account_number }}</a
+    >
+  </li>
+  {% endfor %}
+</ul>

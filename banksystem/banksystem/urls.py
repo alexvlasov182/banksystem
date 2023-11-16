@@ -4,7 +4,15 @@ from django.urls import path, include
 from django.conf.urls import url
 from . import views
 from django.urls import path
-from .views import SignUpView, CustomLoginView, CustomLogoutView, customer_dashboard
+from .views import (
+    SignUpView,
+    CustomLoginView,
+    CustomLogoutView,
+    customer_dashboard,
+    create_account,
+    list_bank_account,
+    show_balance,
+)
 
 
 urlpatterns = [
@@ -13,6 +21,9 @@ urlpatterns = [
     path("login", CustomLoginView.as_view(), name="login"),
     path("logout/", CustomLogoutView.as_view(), name="logout"),
     path("dashboard/", customer_dashboard, name="customer_dashboard"),
+    path("create-account/", create_account, name="create_account"),
+    path("list_bank_accounts/", list_bank_account, name="list_bank_accounts"),
+    path("show-balance/<str:account_number>/", show_balance, name="show_balance"),
     path("admin/", admin.site.urls),
     url(r"^api-auth/", include("rest_framework.urls")),
     url(r"^api/", include("api.urls")),

@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Registration</title>
+    <link
+      rel="stylesheet"
+      href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
+    />
+    <link rel="stylesheet" href="../../static/style.css" />
+  </head>
+
+  <div class="box medium-4 columns medium-pull-4">
+    <h2>List Bank Accounts</h2>
+
+    {% if accounts %}
+
+    <ul>
+      {% for account in accounts %}
+      <div class="row column">
+        <div class="callout primary">
+          <li>{{ account.account_number }} - Balance: {{ account.balance }}</li>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+    <p>No bank accounts found.</p>
+    {% endif %}
+    <p>
+      <a href="{% url 'customer_dashboard' %}">Back to Dashboard</a>
+    </p>
+  </div>
+</html>

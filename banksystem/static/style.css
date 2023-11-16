@@ -76,3 +76,26 @@ form > ul {
 .top-bar {
     padding: 20px 0 0 0;
 }
+
+.logout {
+    text-align: right;
+}
+.logout-div {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    padding: 20px 0 0 0;
+}
+
+.column {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.callout {
+    padding: 2rem;
+}
+
+.box li {
+    list-style-type: none;
+}
