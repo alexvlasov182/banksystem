@@ -42,13 +42,16 @@ urlpatterns = [
         "deposit_success/<str:account_number>/", deposit_success, name="deposit_success"
     ),
     path("no_accounts_deposit", no_accounts_deposit, name="no_accounts_deposit"),
+]
+
+
+# Admin and API URLs
+urlpatterns += [
     path("admin/", admin.site.urls),
     url(r"^api-auth/", include("rest_framework.urls")),
     url(r"^api/", include("api.urls")),
-    # path("branches/", BranchesAPIView.as_view(), name="branch-list"),
     path("", include("crm.urls")),
 ]
-
 """
 banksystem URL Configuration
 

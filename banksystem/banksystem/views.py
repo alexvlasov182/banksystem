@@ -59,7 +59,6 @@ def customer_dashboard(request):
         show_balance_url = reverse(
             "show_balance", kwargs={"account_number": str(account_number)}
         )
-        print(f"Account: {account_number}, URL: {show_balance_url}")
         show_balance_urls[account_number] = show_balance_url
 
     return render(
@@ -104,15 +103,11 @@ def create_account(request):
 def show_balance(request, account_number):
     customer = request.user.customer
     accounts = BankAccount.objects.filter(customer=customer)
-
-    # Find the account with the specified account_number
     account = accounts.filter(account_number=account_number).first()
 
     if account:
-        # If the account is found, render the balance
         return render(request, "show_balance.html", {"account": account})
     else:
-        # If the account is not found, you might want to handle this case, e.g., redirect or show an error message
         return render(request, "account_not_found.html")
 
 
@@ -127,14 +122,10 @@ def list_bank_account(request):
 def withdraw(request, account_number):
     customer = request.user.customer
     accounts = BankAccount.objects.filter(customer=customer)
-
-    # Find the account with the specified account_number
     account = accounts.filter(account_number=account_number).first()
 
-    # If the customer has only one account, directly show the balance
     if account:
         if request.method == "POST":
-            # Handle the withdrawal logic here
             form = WithdrawForm(request.POST)
             if form.is_valid():
                 amount = form.cleaned_data["amount"]
@@ -164,11 +155,8 @@ def withdraw(request, account_number):
         return render(
             request, "withdrawal/withdraw.html", {"form": form, "account": account}
         )
-
-    # If the customer has multiple accounts, display a list of accounts
     elif accounts.count() > 1:
         if request.method == "POST":
-            # Handle the form submission to choose an account
             selected_account_number = request.POST.get("account_number")
             selected_account = BankAccount.objects.get(
                 customer=customer, account_number=selected_account_number
@@ -212,7 +200,6 @@ def withdraw(request, account_number):
             "withdrawal/choose_account.html",
             {"form": form, "accounts": accounts},
         )
-
     else:
         return render(request, "withdrawal/no_accounts.html")
 
@@ -223,7 +210,6 @@ def choose_account(request):
     accounts = BankAccount.objects.filter(customer=customer)
 
     if accounts.count() == 1:
-        # If there's only one account, directly redirect to withdraw page
         account_number = accounts.first().account_number
         return redirect("withdraw", account_number=account_number)
     return redirect("withdrawal/choose_account.html", {"accounts": accounts})
@@ -231,11 +217,9 @@ def choose_account(request):
 
 @login_required(login_url="/login")
 def withdraw_success(request, account_number):
-    # Retrive the BankAccount object based on the account number
     try:
         account = BankAccount.objects.get(account_number=account_number)
     except BankAccount.DoesNotExist:
-        # Handle the case where the account doesn't exist
         return render(request, "withdraw_fail.html")
 
     return render(request, "withdraw_success.html", {"account": account})
@@ -252,11 +236,9 @@ def deposit(request, account_number=None):
     customer = request.user.customer
     accounts = BankAccount.objects.filter(customer=customer)
 
-    # If the customer has only one account, directly show the balance
     if accounts.count() == 1:
         account = accounts.first()
         if request.method == "POST":
-            # Handle the deposit logic here
             form = DepositForm(request.POST)
             if form.is_valid():
                 amount = form.cleaned_data["amount"]
@@ -279,11 +261,8 @@ def deposit(request, account_number=None):
         return render(
             request, "deposit/deposit.html", {"form": form, "account": account}
         )
-
-    # If the customer has multiple accounts, display a list of accounts
     elif accounts.count() > 1:
         if request.method == "POST":
-            # Handle the form submission to choose an account
             selected_account_number = request.POST.get("account_number")
             selected_account = BankAccount.objects.get(
                 customer=customer, account_number=selected_account_number
@@ -322,11 +301,9 @@ def deposit(request, account_number=None):
 
 @login_required(login_url="/login")
 def deposit_success(request, account_number=None):
-    # Retrive the BankAcount object based on the account number
     try:
         account = BankAccount.objects.get(account_number=account_number)
     except BankAccount.DoesNotExist:
-        # Handle the case where the account doesn't exist
         return render(request, "deposit/deposit_fail.html")
 
     return render(request, "deposit/deposit_success.html", {"account", account})
