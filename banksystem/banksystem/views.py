@@ -50,7 +50,12 @@ class CustomLoginView(LoginView):
 
 @login_required(login_url="/login")
 def customer_dashboard(request):
-    customer = request.user.customer
+    try:
+        customer = request.user.customer
+    except Customer.DoesNotExist:
+        # Redirect to a page indicating that the user needs to create a customer profile
+        return redirect("login")
+
     accounts = BankAccount.objects.filter(customer=customer)
 
     show_balance_urls = {}
