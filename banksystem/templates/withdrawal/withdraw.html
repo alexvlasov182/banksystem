@@ -1,0 +1,7 @@
+<h1>Withdraw Funds</h1>
+<p>Choose the account from which you want to withdraw:</p>
+
+<form method="post" action="{% url 'withdraw' %}">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Withdraw</button>
+</form>

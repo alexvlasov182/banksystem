@@ -50,7 +50,11 @@ class ShowBalanceForm(forms.Form):
 
 
 class WithdrawForm(forms.Form):
-    pass
+    amount = forms.DecimalField(
+        label="Withdrawal Amount",
+        min_value=0.01,
+        widget=forms.NumberInput(attrs={"step": "0.01"}),
+    )
 
 
 class DepositForm(forms.Form):

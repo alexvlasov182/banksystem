@@ -12,6 +12,10 @@ from .views import (
     create_account,
     list_bank_account,
     show_balance,
+    withdraw,
+    choose_account,
+    withdraw_success,
+    no_accounts,
 )
 
 
@@ -24,6 +28,10 @@ urlpatterns = [
     path("create-account/", create_account, name="create_account"),
     path("list_bank_accounts/", list_bank_account, name="list_bank_accounts"),
     path("show-balance/<str:account_number>/", show_balance, name="show_balance"),
+    path("withdraw/", withdraw, name="withdraw"),
+    path("choose-account/", choose_account, name="choose_account"),
+    path("withdraw-success/", withdraw_success, name="withdraw_success"),
+    path("no-accounts/", no_accounts, name="no_accounts"),
     path("admin/", admin.site.urls),
     url(r"^api-auth/", include("rest_framework.urls")),
     url(r"^api/", include("api.urls")),

@@ -20,15 +20,21 @@
   <hr />
 
   <div class="row small-up-1 medium-up-2 large-up-3">
-    <h2>Your Account Balance</h2>
-    <div class="callout small-12 primary">
-      <p class="show-balance">Your balance is:</p>
-      <span class="balance-green">{{ balance }} €</span>
-    </div>
+    <h1>Choose Account</h1>
+    <p class="withdraw-account">Select the account from the list:</p>
 
-    <p>
-      <a href="{% url 'customer_dashboard' %}">Back to Dashboard</a> |
-      <a href="{% url 'withdraw' %}">Withdraw Accounts</a>
-    </p>
+    <ul>
+      {% for account in accounts %}
+      <div class="flex">
+        <div class="callout primary">
+          <li>
+            <a href="{{ account.account_number|get_show_balance_url }}"
+              >{{ account.account_number }}</a
+            >
+          </li>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
   </div>
 </html>
