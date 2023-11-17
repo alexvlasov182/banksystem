@@ -1,8 +1,10 @@
+{% load custom_filters %}
+
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Registration</title>
+    <title>Foundation | Welcome</title>
     <link
       rel="stylesheet"
       href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
@@ -10,22 +12,23 @@
     <link rel="stylesheet" href="../../static/style.css" />
   </head>
 
-  <div class="box medium-4 columns medium-pull-4">
+  <div class="row logout-div">
+    <a class="" href="{% url ''%}">BankSystem</a>
+    <a class="logout" href="{% url 'user-logout'%}">Logout</a>
+  </div>
+
+  <hr />
+
+  <div class="row small-up-1 medium-up-2 large-up-3">
     <h2>List Bank Accounts</h2>
 
-    {% if accounts %}
-
-    <ul>
-      {% for account in accounts %}
-      <div class="row column">
-        <div class="callout primary">
-          <li>{{ account.account_number }} - Balance: {{ account.balance }}</li>
-        </div>
+    {% if accounts %} {% for account in accounts %}
+    <div class="flex">
+      <div class="callout primary">
+        <li class="account-name-list">{{ account.account_number }}</li>
       </div>
-      {% endfor %}
-    </ul>
-
-    {% else %}
+    </div>
+    {% endfor %} {% else %}
     <p>No bank accounts found.</p>
     {% endif %}
     <p>

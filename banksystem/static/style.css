@@ -82,9 +82,12 @@ form > ul {
 }
 .logout-div {
     display: flex;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-start;
     padding: 20px 0 0 0;
+}
+
+.logout-div a {
+    padding: 0 0 0 40px;
 }
 
 .column {
@@ -98,4 +101,54 @@ form > ul {
 
 .box li {
     list-style-type: none;
+}
+
+.options {
+    font-style: italic;
+    color: #636262;
+}
+
+.options-list {
+    padding: 0 0 0 40px;
+}
+
+.balance-green {
+    color: green;
+    font-size: 25px;
+}
+
+.balance {
+    padding: 0 0 0 20px;
+}
+textarea[rows] {
+    height: 0;
+}
+
+.options-list li {
+    padding: 10px 0 10px 0;
+}
+.account-name {
+    font-size: 20px;
+    font-style: italic;
+    color: #8a8a8a;
+}
+
+.flex li {
+    list-style-type: none;
+}
+
+.account-name-list {
+    font-size: 20px;
+    font-style: italic;
+    color: #636262;
+}
+
+.show-balance {
+    font-size: 20px;
+    font-style: italic;
+    color: #636262;
+}
+
+.show-balance-list {
+    margin: 0 0 0 40px;
 }
