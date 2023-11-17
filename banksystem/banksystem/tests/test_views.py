@@ -11,7 +11,7 @@ class TransactionViewsTestCase(TestCase):
         self.client.login(username="testuser", password="testpass")
 
     def test_deposit_view(self):
-        url = reverse("deposit")
+        url = reverse("deposit_success")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         # Add more assertions as needed for the deposit view

@@ -180,3 +180,9 @@ textarea[rows] {
 .negative-ammount {
     color: red;
 }
+
+.color-deposit {
+    color: green;
+
+    font-size: 25px;
+}

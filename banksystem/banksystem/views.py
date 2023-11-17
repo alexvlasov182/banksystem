@@ -8,8 +8,6 @@ from .forms import (
     SignUpForm,
     LoginForm,
     CreateAccountForm,
-    ListAccountsForm,
-    ShowBalanceForm,
     WithdrawForm,
     DepositForm,
 )
@@ -337,11 +335,6 @@ def deposit_success(request, account_number=None):
 @login_required(login_url="/login")
 def no_accounts_deposit(request):
     return render(request, "deposit/no_accounts_deposit.html")
-
-
-def deposit(request):
-    # Your deposit logic here
-    return render(request, "deposit/deposit.html")
 
 
 class CustomLogoutView(LogoutView):
