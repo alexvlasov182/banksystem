@@ -45,7 +45,10 @@
         >
         - <span class="account-name">{{ account.account_number }}</span>
       </li>
-      {% endfor %} {% comment %}
+      {% endfor %}
+      <!-- Deposit Block -->
+      <h3 class="options">Deposit</h3>
+      {% comment %}
       <li><a href="{% url 'deposit' %}">Deposit</a></li>
       {% endcomment %}
     </ul>
