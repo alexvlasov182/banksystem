@@ -1,38 +1,32 @@
 {% load custom_filters %}
-
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
-    <link
-      rel="stylesheet"
-      href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
-    />
-    <link rel="stylesheet" href="../../static/style.css" />
-  </head>
-
-  <div class="row logout-div">
-    <a class="" href="{% url ''%}">BankSystem</a>
-    <a class="logout" href="{% url 'user-logout'%}">Logout</a>
-  </div>
-
-  <hr />
-
-  <div class="row small-up-1 medium-up-2 large-up-3">
-
-    <h2>Withdrawal - {{account.account_number}}</h2>
-    <p class="show-balance">Account Balance: <span class="withdraw-balance">{{account.balance}}</span></p>
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="button" type="submit">Withdraw</button>
-    </form>
-    {% if error_message %}
-        <p>{{ error_message }}</p>
-    {% endif %}
-    </form>
-    <p><a href="{% url 'customer_dashboard' %}">Back to Dashboard</a></p>
-    </div>
-    
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Foundation | Welcome</title>
+      <link
+         rel="stylesheet"
+         href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
+         />
+      <link rel="stylesheet" href="../../static/style.css" />
+   </head>
+   <div class="row logout-div">
+      <a class="" href="{% url ''%}">BankSystem</a>
+      <a class="logout" href="{% url 'user-logout'%}">Logout</a>
+   </div>
+   <hr />
+   <div class="row small-up-1 medium-up-2 large-up-3">
+      <h2>Withdrawal - {{account.account_number}}</h2>
+      <p class="show-balance">Account Balance: <span class="withdraw-balance">{{account.balance}}</span></p>
+      <form method="post" action="">
+         {% csrf_token %}
+         {{ form.as_p }}
+         <button class="button" type="submit">Withdraw</button>
+      </form>
+      {% if error_message %}
+      <p>{{ error_message }}</p>
+      {% endif %}
+      </form>
+      <p><a href="{% url 'customer_dashboard' %}">Back to Dashboard</a></p>
+   </div>
 </html>

@@ -1,28 +1,22 @@
 <!-- templates/auth/login.html -->
-
-
-
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Registration</title>
-    <link
-      rel="stylesheet"
-      href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
-    />
-    <link rel="stylesheet" href="../../static/style.css" />
-  </head>
-
-  <div class="box medium-4 columns medium-pull-4">
-    <form method="POST" autocomplete="off" class="callout text-center" action={% url 'login' %}>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>User Registration</title>
+      <link
+         rel="stylesheet"
+         href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
+         />
+      <link rel="stylesheet" href="../../static/style.css" />
+   </head>
+   <div class="box medium-4 columns medium-pull-4">
+      <form method="POST" autocomplete="off" class="callout text-center" action={% url 'login' %}>
       <h2>Login</h2>
       {% csrf_token %} {{ form.as_p }}
-
-
       <input type="submit" class="button expanded" value="Login" />
-    </form>
-    <a href="{%url ''%}">Home</a> |
-    <a href="{%url 'signup'%}">Register</a>
-  </div>
+      </form>
+      <a href="{%url ''%}">Home</a> |
+      <a href="{%url 'signup'%}">Register</a>
+   </div>
 </html>

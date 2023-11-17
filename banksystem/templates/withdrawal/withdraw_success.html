@@ -1,30 +1,26 @@
 {% load custom_filters %}
-
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
-    <link
-      rel="stylesheet"
-      href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
-    />
-    <link rel="stylesheet" href="../../static/style.css" />
-  </head>
-
-  <div class="row logout-div">
-    <a class="" href="{% url ''%}">BankSystem</a>
-    <a class="logout" href="{% url 'user-logout'%}">Logout</a>
-  </div>
-
-  <hr />
-
-  <div class="row small-up-1 medium-up-2 large-up-3">
-    <h2>Withdrawal Successful</h2>
-    <p class="show-balance">
-      Amount <span class="negative-ammount"> -{{ amount }}</span> withdrawn from account {{ account.account_number }}.
-    </p>
-    <p class="show-balance">New balance: <span class="account-name account-color">{{ account.balance }}</sapn></p>
-    <a href="{% url 'customer_dashboard' %}">Back to Dashboard</a>
-  </div>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Foundation | Welcome</title>
+      <link
+         rel="stylesheet"
+         href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
+         />
+      <link rel="stylesheet" href="../../static/style.css" />
+   </head>
+   <div class="row logout-div">
+      <a class="" href="{% url ''%}">BankSystem</a>
+      <a class="logout" href="{% url 'user-logout'%}">Logout</a>
+   </div>
+   <hr />
+   <div class="row small-up-1 medium-up-2 large-up-3">
+      <h2>Withdrawal Successful</h2>
+      <p class="show-balance">
+         Amount <span class="negative-ammount"> -{{ amount }}</span> withdrawn from account {{ account.account_number }}.
+      </p>
+      <p class="show-balance">New balance: <span class="account-name account-color">{{ account.balance }}</sapn></p>
+      <a href="{% url 'customer_dashboard' %}">Back to Dashboard</a>
+   </div>
 </html>
