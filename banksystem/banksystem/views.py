@@ -53,7 +53,6 @@ def customer_dashboard(request):
     try:
         customer = request.user.customer
     except Customer.DoesNotExist:
-        # Redirect to a page indicating that the user needs to create a customer profile
         return redirect("login")
 
     accounts = BankAccount.objects.filter(customer=customer)

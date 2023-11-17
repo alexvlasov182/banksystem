@@ -1,0 +1,130 @@
+# Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Runtime data
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+
+# Python virtual environment
+venv/
+env/
+
+# Visual Studio Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Thumbnails
+Thumbs.db
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.obj
+*.dll
+*.pyd
+*.exe
+
+# Compiled C++ files
+*.out
+
+# Compiled Java files
+*.class
+
+# Compiled Ruby files
+*.rbc
+
+# Compiled TypeScript files
+*.tsbuildinfo
+
+# Compiled JavaScript files
+*.js
+
+# Compiled Objective-C files
+*.o
+
+# Compiled Swift files
+*.swiftmodule
+*.swiftdoc
+
+# Documentation
+docs/_build/
+
+# Package files
+*.tar
+*.gz
+*.bz2
+*.zst
+*.xz
+*.whl
+*.jar
+*.war
+*.ear
+*.pybundle
+*.pypart
+*.rpm
+*.deb
+
+# Django migrations
+/migrations/
+
+# Docker
+docker-compose.yml
+Dockerfile
+
+# Heroku
+*.heroku/
+*.sqlite3
+
+# Visual Studio Code directories
+.vscode/
+
+# User-specific files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.user
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.user
+*.vscode
+*.vsc
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
