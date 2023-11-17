@@ -93,6 +93,7 @@ docs/_build/
 /migrations/
 banksystem/migrations/
 banksystem/banksystem/migrations/
+banksystem/api/migrations/
 # Docker
 docker-compose.yml
 Dockerfile
