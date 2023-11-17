@@ -24,9 +24,10 @@
     <h3 class="options">Options:</h3>
     <ul class="options-list">
       <li><a href="{% url 'create_account' %}">Create New Bank Account</a></li>
-
+      <!-- List Bank Block -->
       <li><a href="{% url 'list_bank_accounts' %}">List Bank Accounts</a></li>
-
+      <!-- Show Balance Block -->
+      <h3 class="options">Show Balance</h3>
       {% for account in accounts %}
       <li class="show-balance-list">
         <a href="{{ account.account_number|get_show_balance_url }}"
@@ -34,14 +35,10 @@
         >
         - <span class="account-name">{{ account.account_number }}</span>
       </li>
-      {% endfor %} {% comment %}
-      <li>
-        <a href="{% url 'withdraw' account_number=account.account_number %}"
-          >Withdraw</a
-        >
-        - <span class="account-name">{{ account.account_number }}</span>
-      </li>
-      {% endcomment %} {% for account in accounts %}
+      {% endfor %}
+      <!-- Withdraw Block -->
+      <h3 class="options">Withdraw</h3>
+      {% for account in accounts %}
       <li class="show-balance-list">
         <a href="{% url 'withdraw' account_number=account.account_number %}"
           >Withdraw</a
