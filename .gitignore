@@ -91,7 +91,8 @@ docs/_build/
 
 # Django migrations
 /migrations/
-
+banksystem/migrations/
+banksystem/banksystem/migrations/
 # Docker
 docker-compose.yml
 Dockerfile
