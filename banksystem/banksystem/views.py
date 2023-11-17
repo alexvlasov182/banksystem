@@ -112,7 +112,7 @@ def show_balance(request, account_number):
 
     if account:
         # If the account is found, render the balance
-        return render(request, "show_balance.html", {"balance": account.balance})
+        return render(request, "show_balance.html", {"account": account})
     else:
         # If the account is not found, you might want to handle this case, e.g., redirect or show an error message
         return render(request, "account_not_found.html")
@@ -126,13 +126,15 @@ def list_bank_account(request):
 
 
 @login_required(login_url="/login")
-def withdraw(request):
+def withdraw(request, account_number):
     customer = request.user.customer
     accounts = BankAccount.objects.filter(customer=customer)
 
+    # Find the account with the specified account_number
+    account = accounts.filter(account_number=account_number).first()
+
     # If the customer has only one account, directly show the balance
-    if accounts.count() == 1:
-        account = accounts.first()
+    if account:
         if request.method == "POST":
             # Handle the withdrawal logic here
             form = WithdrawForm(request.POST)

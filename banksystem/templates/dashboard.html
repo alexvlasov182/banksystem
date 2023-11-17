@@ -34,9 +34,21 @@
         >
         - <span class="account-name">{{ account.account_number }}</span>
       </li>
-      {% endfor %}
-      <li><a href="{% url 'withdraw' %}">Withdraw</a></li>
-      {% comment %}
+      {% endfor %} {% comment %}
+      <li>
+        <a href="{% url 'withdraw' account_number=account.account_number %}"
+          >Withdraw</a
+        >
+        - <span class="account-name">{{ account.account_number }}</span>
+      </li>
+      {% endcomment %} {% for account in accounts %}
+      <li class="show-balance-list">
+        <a href="{% url 'withdraw' account_number=account.account_number %}"
+          >Withdraw</a
+        >
+        - <span class="account-name">{{ account.account_number }}</span>
+      </li>
+      {% endfor %} {% comment %}
       <li><a href="{% url 'deposit' %}">Deposit</a></li>
       {% endcomment %}
     </ul>

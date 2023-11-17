@@ -1,3 +1,4 @@
-<h1>Withdrawal Successful</h1>
-<p>Your withdrawal was successful.</p>
-<p>Updated balance: ${{ new_balance }}</p>
+<h2>Withdrawal Successful</h2>
+<p>Amount {{ amount }} withdrawn from account {{ account.account_number }}.</p>
+<p>New balance: {{ account.balance }}</p>
+<a href="{% url 'customer_dashboard' %}">Back to Dashboard</a>
