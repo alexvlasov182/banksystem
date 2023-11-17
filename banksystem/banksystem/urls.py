@@ -16,6 +16,9 @@ from .views import (
     choose_account,
     withdraw_success,
     no_accounts,
+    deposit,
+    deposit_success,
+    no_accounts_deposit,
 )
 
 
@@ -32,6 +35,13 @@ urlpatterns = [
     path("choose-account/", choose_account, name="choose_account"),
     path("withdraw-success/", withdraw_success, name="withdraw_success"),
     path("no-accounts/", no_accounts, name="no_accounts"),
+    path("deposit/", deposit, name="deposit"),
+    path("deposit/<str:account_number>/", deposit, name="deposit"),
+    path("deposit_success/", deposit_success, name="deposit_success"),
+    path(
+        "deposit_success/<str:account_number>/", deposit_success, name="deposit_success"
+    ),
+    path("no_accounts_deposit", no_accounts_deposit, name="no_accounts_deposit"),
     path("admin/", admin.site.urls),
     url(r"^api-auth/", include("rest_framework.urls")),
     url(r"^api/", include("api.urls")),

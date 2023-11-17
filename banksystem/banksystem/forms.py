@@ -58,4 +58,4 @@ class WithdrawForm(forms.Form):
 
 
 class DepositForm(forms.Form):
-    pass
+    amount = forms.DecimalField(label="Amount", min_value=0.01)

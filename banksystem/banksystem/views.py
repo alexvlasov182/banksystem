@@ -248,5 +248,101 @@ def no_accounts(request):
     return render(request, "no_accounts.html")
 
 
+# Deposit Functionality
+@login_required(login_url="/login")
+def deposit(request, account_number=None):
+    customer = request.user.customer
+    accounts = BankAccount.objects.filter(customer=customer)
+
+    # If the customer has only one account, directly show the balance
+    if accounts.count() == 1:
+        account = accounts.first()
+        if request.method == "POST":
+            # Handle the deposit logic here
+            form = DepositForm(request.POST)
+            if form.is_valid():
+                amount = form.cleaned_data["amount"]
+                account.balance += amount
+                account.save()
+
+                Transaction.objects.create(
+                    bank_account=account,
+                    transaction_type="Deposit",
+                    amount=amount,
+                )
+                return render(
+                    request,
+                    "deposit/deposit_success.html",
+                    {"account": account, "amount": amount},
+                )
+        else:
+            form = DepositForm()
+
+        return render(
+            request, "deposit/deposit.html", {"form": form, "account": account}
+        )
+
+    # If the customer has multiple accounts, display a list of accounts
+    elif accounts.count() > 1:
+        if request.method == "POST":
+            # Handle the form submission to choose an account
+            selected_account_number = request.POST.get("account_number")
+            selected_account = BankAccount.objects.get(
+                customer=customer, account_number=selected_account_number
+            )
+
+            form = DepositForm(request.POST)
+            if form.is_valid():
+                amount = form.cleaned_data["amount"]
+                selected_account.balance += amount
+                selected_account.save()
+
+                Transaction.objects.create(
+                    bank_account=selected_account,
+                    transaction_type="Deposit",
+                    amount=amount,
+                )
+                return render(
+                    request,
+                    "deposit/deposit_success.html",
+                    {
+                        "account": selected_account,
+                        "amount": amount,
+                        "accounts": accounts,
+                    },
+                )
+        else:
+            form = DepositForm()
+        return render(
+            request,
+            "deposit/choose_account_deposit.html",
+            {"form": form, "accounts": accounts},
+        )
+    else:
+        return render(request, "deposit/no_accounts_deposit.html")
+
+
+@login_required(login_url="/login")
+def deposit_success(request, account_number=None):
+    # Retrive the BankAcount object based on the account number
+    try:
+        account = BankAccount.objects.get(account_number=account_number)
+    except BankAccount.DoesNotExist:
+        # Handle the case where the account doesn't exist
+        return render(request, "deposit/deposit_fail.html")
+
+    return render(request, "deposit/deposit_success.html", {"account", account})
+
+
+@login_required(login_url="/login")
+def no_accounts_deposit(request):
+    return render(request, "deposit/no_accounts_deposit.html")
+
+
+def deposit(request):
+    # Your deposit logic here
+    return render(request, "deposit/deposit.html")
+
+
 class CustomLogoutView(LogoutView):
     template_name = "logout.html"

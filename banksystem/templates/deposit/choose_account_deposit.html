@@ -1,0 +1,13 @@
+<h2>Choose an Account for Deposit</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <label for="account_number">Choose an account:</label>
+  <select name="account_number">
+    {% for account in accounts %}
+    <option value="{{ account.account_number }}">
+      {{ account.account_number }}
+    </option>
+    {% endfor %}
+  </select>
+  <button type="submit">Deposit</button>
+</form>
