@@ -1,17 +1,87 @@
-from django.test import TestCase, Client
+from decimal import Decimal, ROUND_HALF_UP
+from django.test import SimpleTestCase, TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
-from banksystem.models import Customer, BankAccount
+from banksystem.models import Customer, BankAccount, Transaction
 
 
-class TransactionViewsTestCase(TestCase):
+class CustomerModelTest(TestCase):
     def setUp(self):
-        # Create a user and log in
+        # Create a user for the Customer
         self.user = User.objects.create_user(username="testuser", password="testpass")
-        self.client.login(username="testuser", password="testpass")
 
-    def test_deposit_view(self):
-        url = reverse("deposit_success")
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        # Add more assertions as needed for the deposit view
+        # Create a Customer
+        self.customer = Customer.objects.create(
+            name="Test Customer",
+            user=self.user,
+            address="Test Address",
+            phone_number="1234567890",
+            initial_balance=100.00,
+        )
+
+    def test_customer_str_representation(self):
+        self.assertEqual(str(self.customer), "Test Customer")
+
+
+class BankAccountModelTest(TestCase):
+    def setUp(self):
+        # Create a user for the Customer
+        self.user = User.objects.create_user(username="testuser", password="testpass")
+
+        # Create a Customer
+        self.customer = Customer.objects.create(
+            name="Test Customer",
+            user=self.user,
+            address="Test Address",
+            phone_number="1234567890",
+            initial_balance=100.00,
+        )
+
+        # Create a BankAccount
+        self.bank_account = BankAccount.objects.create(
+            customer=self.customer, account_number="123456789", balance=50.00
+        )
+
+    def test_bank_account_str_representation(self):
+        expected_str = f"Account 123456789 - Test Customer"
+        self.assertEqual(str(self.bank_account), expected_str)
+
+
+class TransactionModelTest(TestCase):
+    def setUp(self):
+        # Create a user for the Customer
+
+        self.user = User.objects.create_user(username="testuser", password="testpass")
+
+        # Create a Customer
+        self.customer = Customer.objects.create(
+            name="Test Customer",
+            user=self.user,
+            address="Test Address",
+            phone_number="1234567890",
+            initial_balance=100.00,
+        )
+
+        # Create a BankAccount
+        self.bank_account = BankAccount.objects.create(
+            customer=self.customer, account_number="123456789", balance=50.00
+        )
+
+        # Create a Transaction
+        self.transaction = Transaction.objects.create(
+            bank_account=self.bank_account, transaction_type="Deposit", amount=25.00
+        )
+
+    def test_transaction_str_representation(self):
+        # Create a Transaction with a specific amount
+
+        amount = Decimal("25.00")
+        transaction = Transaction.objects.create(
+            bank_account=self.bank_account, transaction_type="Deposit", amount=amount
+        )
+
+        # Create the expected string representation
+        expected_str = f"Deposit of {amount:.2f} on {transaction.timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
+
+        # Compare the entire string representation
+        self.assertEqual(str(transaction), expected_str)

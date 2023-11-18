@@ -1,3 +1,4 @@
+from decimal import ROUND_HALF_UP, Decimal
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -51,4 +52,8 @@ class Transaction(models.Model):
         """
         String representation of the transaction.
         """
-        return f"{self.transaction_type} of {self.amount} on {self.timestamp}"
+        rounded_amount = Decimal(str(self.amount)).quantize(
+            Decimal("0.00"), rounding=ROUND_HALF_UP
+        )
+        timestamp_str = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        return f"{self.transaction_type} of {rounded_amount} on {timestamp_str}"
